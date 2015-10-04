@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<script type="text/javascript">
+
+    function doOrder(){
+        var temp="";
+        var elements = document.forms[0].elements;
+
+        for(var i=0;i<elements.length;i++)
+        {
+            if(elements[i].type=="checkbox")
+            {
+                if(elements[i].checked==true)
+                {
+                    temp = temp + elements[i].value +",";
+                }
+            }
+        }
+
+        if(temp=="") return false;
+
+        document.getElementById("ordersid").value = temp;
+        document.forms[0].ordersid.value=document.getElementById("ordersid").value;
+        document.forms[0].method="POST";
+		document.forms[0].submit();
+    }
+
+</script>
+<form action="/accounts/order/" onsubmit="return doOrder()">{% csrf_token %}
+    <input type="hidden" id="ordersid" name="ordersid"/>
+  <h2>Hi {{full_name}} you are now logged in!</h2>
+<table border="solid 1px">
+    <thead><strong>Total Items</strong></thead>
+    <tbody>
+        <tr>
+            <td>Select</td>
+            <td>Item Name</td>
+            <td>Brand Name</td>
+            <td>Sub Category</td>
+            <td>Category</td>
+            <td>Price</td>
+            <td>Qty Left</td>
+            <td>Seller</td>
+        </tr>
+        {% for item in all_items %}
+        <tr>
+            <td style="width:1%"><input type="checkbox" value="{{item.item_id}}" /> </td>
+            <td style="width:20%">{{item.item_name}}</td>
+            <td style="width:20%">{{item.brand_name}}</td>
+            <td style="width:20%">{{item.sub_category}}</td>
+            <td style="width:10%">{{item.category_name}}</td>
+            <td style="width:10%">{{item.price|floatformat:3}}</td>
+            <td style="width:10%">{{item.qty}}</td>
+            <td style="width:15%">{{item.seller}}</td>
+        {% endfor %}
+    </tbody>
+</table>
+<img src="{% get_static_prefix %}/images/order_button.jpg" onclick="doOrder()" width="100px" height="30px"/>
+<br/>
+<br/>
+
+{% if my_items %}
+<table border="solid 1px">
+    <thead><strong>My Items</strong></thead>
+    <tbody>
+        <tr>
+            <td>Item Name</td>
+            <td>Brand Name</td>
+            <td>Sub Category</td>
+            <td>Category</td>
+            <td>Price</td>
+            <td>Qty Left</td>
+        </tr>
+        {% for item in my_items %}
+        <tr>
+            <td style="width:20%">{{item.item_name}}</td>
+            <td style="width:20%">{{item.brand_name}}</td>
+            <td style="width:20%">{{item.sub_category}}</td>
+            <td style="width:10%">{{item.category_name}}</td>
+            <td style="width:10%">{{item.price|floatformat:3}}</td>
+            <td style="width:15%">{{item.qty}}</td>
+        {% endfor %}
+    <tr></tr>
+    <tr></tr>
+    </tbody>
+</table>
+{% endif %}
+</form>
+  <p>Click <a href="/accounts/logout/">here</a> to logout.</p>
+
+{% endblock %}
