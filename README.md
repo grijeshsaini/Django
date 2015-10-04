@@ -6,13 +6,13 @@ and Pycharm(4.5.4) as IDE.
 
 
 ###Brief Description about the code:-
-####Try to write code in TDD approach (nose plugin) with DRY principle.
-####Created Log-in and Log-out functionality.
-####User can see his items as well as all other items also on the UI.
-####User can disable and enable categories.
-####Used Logger framework.
-####Used django default user auth functionality.
-####Create models and tried to test those as well.
-####Try to handle exceptions (Needs to improve).
-####Separated code in DAO and Service Layer.
-####Created separate file to keep the queries.
+Try to write code in TDD approach (nose plugin) with DRY principle<br/>
+Created Log-in and Log-out functionality.<br/>
+User can see his items as well as all other items also on the UI.<br/>
+User can disable and enable categories<br/>
+Used Logger framework<br/>
+Used django default user auth functionality<br/>
+Create models and tried to test those as well<br/>
+Try to handle exceptions (Needs to improve)<br/>
+Separated code in DAO and Service Layer<br/>
+Created separate file to keep the queries<br/>
